@@ -1,0 +1,37 @@
+<?xml version='1.0' ?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <tools>
+                                <children>
+                                    <dwt_better_logs>
+                                        <title>Logs Analyzer</title>
+                                    </dwt_better_logs>
+                                </children>
+                            </tools>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <system>
+            <children>
+                <tools>
+                    <children>
+                        <dwt_better_logs>
+                            <title>Logs Analyzer</title>
+                            <action>adminhtml/logs</action>
+                            <sort_order>1220</sort_order>
+                        </dwt_better_logs>
+                    </children>
+                </tools>
+            </children>
+        </system>
+    </menu>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <DoWhileTrue_BetterLog>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Log />
+            </depends>
+        </DoWhileTrue_BetterLog>
+    </modules>
+</config>
