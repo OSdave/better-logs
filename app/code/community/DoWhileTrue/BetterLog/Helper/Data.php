@@ -24,7 +24,7 @@ class DoWhileTrue_BetterLog_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
-    public function log($message, $level = null, $file = '', $forceLog = true)
+    public function log($message, $level = null, $file = '', $forceLog = false)
     {
         $isActive = Mage::getStoreConfig(self::XML_CONFIG_PATH_ACTIVE);
         if ($isActive) {
@@ -45,20 +45,32 @@ class DoWhileTrue_BetterLog_Helper_Data extends Mage_Core_Helper_Abstract
     public function IDELink($line, $pattern)
     {
         if (!$this->_stacktraceAsLink) {
-            return $line . PHP_EOL;
+            return $line;
         } else {
             $matches = array();
             preg_match($pattern, $line, $matches, PREG_OFFSET_CAPTURE);
 
-            if (isset($matches[1]) && isset($matches[1][0]) && isset($matches[2]) && isset($matches[2][0])) {
-                $baseLink = str_replace($this->_serverBasePath, $this->_localBasePath, $matches[1][0]);
-                $link = '<a href="' . $this->_stacktraceLink;
-                $link .= $baseLink . '?line=' . $matches[2][0] . '">';
-                $link .= $line . '</a><br />';
+            if (isset($matches[1]) && isset($matches[1][0])) {
+                $exploded = explode('/', $matches[1][0]);
+                foreach ($exploded as $index => $part) {
+                    if ($part != 'app') {
+                        unset($exploded[$index]);
+                    } else {
+                        break;
+                    }
+                }
+                $baseLink =  implode('/', $exploded);
+                $link = '<a href="' . $this->_stacktraceLink . $this->_localBasePath . DS .  $baseLink;
+                if (isset($matches[2]) && isset($matches[2][0])) {
+                    $link .= '?line=' . $matches[2][0];
+                } else {
+                    $link .= '?line=1';
+                }
+                $link .= '">' . $line . '</a>';
 
                 return $link;
             } else {
-                return $line . PHP_EOL;
+                return $line;
             }
         }
     }

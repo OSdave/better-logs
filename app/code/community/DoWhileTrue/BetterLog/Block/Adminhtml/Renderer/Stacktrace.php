@@ -8,13 +8,13 @@ class DoWhileTrue_BetterLog_Block_Adminhtml_Renderer_Stacktrace extends Varien_D
         $value = $this->getValue();
         $unserialized = unserialize($value);
 
-        $html = '<span id="'.$this->getHtmlId().'" name="'.$this->getName().'" '.$this->serialize($this->getHtmlAttributes()).' >';
+        $html = '<span id="'.$this->getHtmlId().'" name="'.$this->getName().'" '.$this->serialize($this->getHtmlAttributes()).' ><ul>';
 
         $pattern = '|(.+) line ([0-9]+) calls|';
         foreach ($unserialized as $line) {
-            $html .= Mage::helper('dwt_log')->IDELink($line, $pattern);
+            $html .= '<li>' . Mage::helper('dwt_log')->IDELink($line, $pattern) . '</li>';
         }
-        $html .= "</span>";
+        $html .= "</ul></span>";
         $html .= $this->getAfterElementHtml();
         return $html;
     }

@@ -54,6 +54,8 @@
             <log>
                 <dwt_log_active>2</dwt_log_active>
                 <stacktrace_as_link>1</stacktrace_as_link>
+                <stacktrace_link><![CDATA[netbeans://]]></stacktrace_link>
+                <local_base_path><![CDATA[/var/www/html/sisley]]></local_base_path>
             </log>
         </dev>
     </default>
